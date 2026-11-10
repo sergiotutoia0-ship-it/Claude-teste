@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sua Brand — Eleven Labs</title>
+  <link rel="stylesheet" href="assets/style.css" />
+  <script>
+    // Só entra na Brand quem teve o pagamento aprovado no checkout
+    (function () {
+      try {
+        if (!sessionStorage.getItem('elevenlabs_pedido')) location.replace('checkout.html');
+      } catch (_) { /* armazenamento bloqueado: deixa seguir */ }
+    })();
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">Eleven<span>Labs</span></a>
+      <nav class="nav"><span id="pedido-tag" class="badge" style="margin:0"></span></nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <span class="badge">✓ Pagamento aprovado</span>
+          <h2>Bem-vindo(a), <span class="gradient" id="ola-nome">cliente</span>!</h2>
+          <p>Etapa 2 de 2 — Configure a Brand da <strong id="ola-empresa">sua empresa</strong> para usarmos em todas as vozes e conteúdos.</p>
+        </div>
+
+        <div class="layout-2">
+          <!-- FORM DA BRAND -->
+          <form id="brand-form" class="card">
+            <h3 style="margin-bottom:16px">Identidade da marca</h3>
+            <div class="form-group">
+              <label for="marca">Nome da marca</label>
+              <input id="marca" required />
+            </div>
+            <div class="form-group">
+              <label for="slogan">Slogan</label>
+              <input id="slogan" placeholder="Ex.: A voz que vende por você" />
+            </div>
+            <div class="form-group">
+              <label for="logo">Logo (PNG, JPG ou SVG)</label>
+              <input id="logo" type="file" accept="image/*" />
+            </div>
+            <div class="form-group">
+              <label>Cores da marca</label>
+              <div class="color-row">
+                <input id="cor1" type="color" value="#7c5cff" aria-label="Cor principal" />
+                <input id="cor2" type="color" value="#00d4b4" aria-label="Cor secundária" />
+              </div>
+            </div>
+
+            <h3 style="margin:8px 0 16px">Voz oficial</h3>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="voz">Estilo de voz</label>
+                <select id="voz">
+                  <option>Feminina — calorosa</option>
+                  <option>Feminina — profissional</option>
+                  <option>Masculina — grave</option>
+                  <option>Masculina — jovem</option>
+                  <option>Clonar a voz do porta-voz</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="tom">Tom de comunicação</label>
+                <select id="tom">
+                  <option>Amigável</option>
+                  <option>Confiante</option>
+                  <option>Sofisticado</option>
+                  <option>Divertido</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="idiomas">Idiomas</label>
+              <input id="idiomas" value="Português, Inglês, Espanhol" />
+            </div>
+            <div class="form-group">
+              <label for="frase">Frase de teste da voz</label>
+              <textarea id="frase" rows="3">Olá! Seja bem-vindo. Como posso te ajudar hoje?</textarea>
+            </div>
+
+            <button type="button" class="btn btn-ghost btn-block" id="ouvir" style="margin-bottom:12px">🔊 Ouvir prévia</button>
+            <button type="submit" class="btn btn-primary btn-block">Salvar minha Brand</button>
+          </form>
+
+          <!-- PRÉVIA -->
+          <aside>
+            <div class="card" style="margin-bottom:20px">
+              <h3 style="margin-bottom:16px">Prévia</h3>
+              <div class="preview-card" id="preview">
+                <div class="preview-logo" id="pv-logo">E</div>
+                <div>
+                  <h2 id="pv-marca" style="font-size:1.8rem">Sua marca</h2>
+                  <p id="pv-slogan" style="opacity:.85">Seu slogan aparece aqui</p>
+                  <p id="pv-voz" style="opacity:.7;font-size:.85rem;margin-top:12px"></p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <h3 style="margin-bottom:12px">Seu pedido</h3>
+              <div class="summary-line"><span>Pedido</span><span id="pd-id">—</span></div>
+              <div class="summary-line"><span>Plano</span><span id="pd-plano">—</span></div>
+              <div class="summary-line"><span>E-mail</span><span id="pd-email">—</span></div>
+              <div class="summary-line total"><span>Pago</span><span id="pd-valor">—</span></div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© <span id="ano"></span> Eleven Labs. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+    const $ = id => document.getElementById(id);
+    $('ano').textContent = new Date().getFullYear();
+    const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const NOMES = { starter: 'Starter', pro: 'Pro', business: 'Business' };
+
+    let pedido = {};
+    try { pedido = JSON.parse(sessionStorage.getItem('elevenlabs_pedido')) || {}; } catch (_) {}
+
+    if (pedido.nome) $('ola-nome').textContent = pedido.nome.split(' ')[0];
+    if (pedido.empresa) { $('ola-empresa').textContent = pedido.empresa; $('marca').value = pedido.empresa; }
+    if (pedido.pedidoId) { $('pd-id').textContent = pedido.pedidoId; $('pedido-tag').textContent = pedido.pedidoId; }
+    else $('pedido-tag').classList.add('hidden');
+    if (pedido.plano) $('pd-plano').textContent = NOMES[pedido.plano] || pedido.plano;
+    if (pedido.email) $('pd-email').textContent = pedido.email;
+    if (pedido.valor) $('pd-valor').textContent = brl(pedido.valor);
+
+    // Restaura Brand salva antes
+    let salvo = {};
+    try { salvo = JSON.parse(localStorage.getItem('elevenlabs_brand')) || {}; } catch (_) {}
+    ['marca', 'slogan', 'cor1', 'cor2', 'voz', 'tom', 'idiomas', 'frase'].forEach(k => { if (salvo[k]) $(k).value = salvo[k]; });
+    let logoData = salvo.logo || '';
+
+    function atualizarPrevia() {
+      const c1 = $('cor1').value, c2 = $('cor2').value;
+      const marca = $('marca').value.trim() || 'Sua marca';
+      $('preview').style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
+      $('preview').style.color = '#fff';
+      $('pv-marca').textContent = marca;
+      $('pv-slogan').textContent = $('slogan').value.trim() || 'Seu slogan aparece aqui';
+      $('pv-voz').textContent = `🎙️ ${$('voz').value} · ${$('tom').value}`;
+      const logo = $('pv-logo');
+      logo.style.background = 'rgba(255,255,255,0.2)';
+      logo.innerHTML = '';
+      if (logoData) {
+        const img = document.createElement('img');
+        img.src = logoData; img.alt = 'Logo';
+        logo.appendChild(img);
+      } else {
+        logo.textContent = marca.charAt(0).toUpperCase();
+      }
+    }
+    document.querySelectorAll('#brand-form input:not([type=file]), #brand-form select')
+      .forEach(el => el.addEventListener('input', atualizarPrevia));
+
+    $('logo').addEventListener('change', e => {
+      const f = e.target.files[0];
+      if (!f) return;
+      const r = new FileReader();
+      r.onload = () => { logoData = r.result; atualizarPrevia(); };
+      r.readAsDataURL(f);
+    });
+
+    // Prévia de voz usando a síntese do navegador
+    // (para usar as vozes reais da Eleven Labs, troque por uma chamada à sua API de TTS)
+    $('ouvir').addEventListener('click', () => {
+      if (!('speechSynthesis' in window)) return toast('Seu navegador não suporta prévia de voz.');
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance($('frase').value);
+      u.lang = 'pt-BR';
+      const v = $('voz').value;
+      u.pitch = v.startsWith('Masculina') ? (v.includes('grave') ? 0.6 : 0.9) : 1.15;
+      u.rate = $('tom').value === 'Divertido' ? 1.15 : 1;
+      speechSynthesis.speak(u);
+    });
+
+    function toast(msg) {
+      const t = document.createElement('div');
+      t.className = 'toast'; t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2800);
+    }
+
+    $('brand-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const dados = { logo: logoData };
+      ['marca', 'slogan', 'cor1', 'cor2', 'voz', 'tom', 'idiomas', 'frase'].forEach(k => dados[k] = $(k).value);
+      try { localStorage.setItem('elevenlabs_brand', JSON.stringify(dados)); } catch (_) {}
+      toast('✓ Brand salva com sucesso!');
+    });
+
+    atualizarPrevia();
+  </script>
+</body>
+</html>

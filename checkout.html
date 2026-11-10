@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Eleven Labs</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <a href="index.html" class="logo">Eleven<span>Labs</span></a>
+      <nav class="nav"><a href="index.html#planos">← Voltar aos planos</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="container">
+        <div class="section-title">
+          <h2>Finalizar assinatura</h2>
+          <p>Etapa 1 de 2 — Pagamento. Em seguida você configura sua Brand.</p>
+        </div>
+
+        <div class="layout-2">
+          <!-- FORMULÁRIO -->
+          <form id="checkout-form" class="card" novalidate>
+            <h3 style="margin-bottom:16px">Seus dados</h3>
+            <div class="form-group">
+              <label for="nome">Nome completo</label>
+              <input id="nome" name="nome" autocomplete="name" required />
+              <div class="error" data-for="nome"></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input id="email" name="email" type="email" autocomplete="email" required />
+                <div class="error" data-for="email"></div>
+              </div>
+              <div class="form-group">
+                <label for="empresa">Empresa / Marca</label>
+                <input id="empresa" name="empresa" autocomplete="organization" required />
+                <div class="error" data-for="empresa"></div>
+              </div>
+            </div>
+
+            <h3 style="margin:8px 0 16px">Pagamento</h3>
+            <div class="pay-methods">
+              <button type="button" data-method="cartao" class="active">💳 Cartão</button>
+              <button type="button" data-method="pix">⚡ Pix</button>
+            </div>
+
+            <div id="metodo-cartao">
+              <div class="form-group">
+                <label for="cartao">Número do cartão</label>
+                <input id="cartao" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" maxlength="19" />
+                <div class="error" data-for="cartao"></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="validade">Validade</label>
+                  <input id="validade" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" />
+                  <div class="error" data-for="validade"></div>
+                </div>
+                <div class="form-group">
+                  <label for="cvv">CVV</label>
+                  <input id="cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" />
+                  <div class="error" data-for="cvv"></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="metodo-pix" class="hidden">
+              <p style="color:var(--muted);margin-bottom:16px">
+                Ao clicar em pagar, geraremos o código Pix. A aprovação é confirmada automaticamente.
+              </p>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block" id="pagar">Pagar e continuar</button>
+            <p class="secure">🔒 Pagamento criptografado e seguro</p>
+          </form>
+
+          <!-- RESUMO -->
+          <aside class="card">
+            <h3 style="margin-bottom:16px">Resumo do pedido</h3>
+            <div class="form-group">
+              <label for="plano">Plano</label>
+              <select id="plano">
+                <option value="starter">Starter</option>
+                <option value="pro">Pro</option>
+                <option value="business">Business</option>
+              </select>
+            </div>
+            <div class="summary-line"><span id="resumo-nome">Plano</span><span id="resumo-preco">—</span></div>
+            <div class="summary-line"><span>Desconto</span><span>R$ 0,00</span></div>
+            <div class="summary-line total"><span>Total hoje</span><span id="resumo-total">—</span></div>
+            <p class="secure">Cobrança mensal. Cancele quando quiser.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- STATUS DO PAGAMENTO -->
+  <div class="status hidden" id="status">
+    <div class="status-box">
+      <div id="status-processando">
+        <div class="spinner"></div>
+        <h3>Processando pagamento…</h3>
+        <p style="color:var(--muted)">Não feche esta página.</p>
+      </div>
+      <div id="status-aprovado" class="hidden">
+        <div class="check">✓</div>
+        <h3>Pagamento aprovado!</h3>
+        <p style="color:var(--muted);margin:8px 0 20px">Redirecionando para a configuração da sua Brand…</p>
+        <a href="brand.html" class="btn btn-primary btn-block">Ir para Brand agora</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const PLANOS = {
+      starter:  { nome: 'Plano Starter',  preco: 97 },
+      pro:      { nome: 'Plano Pro',      preco: 297 },
+      business: { nome: 'Plano Business', preco: 997 },
+    };
+    const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const $ = id => document.getElementById(id);
+
+    // Plano vindo da URL (?plano=pro)
+    const planoUrl = new URLSearchParams(location.search).get('plano');
+    $('plano').value = PLANOS[planoUrl] ? planoUrl : 'pro';
+    function atualizarResumo() {
+      const p = PLANOS[$('plano').value];
+      $('resumo-nome').textContent = p.nome;
+      $('resumo-preco').textContent = brl(p.preco);
+      $('resumo-total').textContent = brl(p.preco);
+    }
+    $('plano').addEventListener('change', atualizarResumo);
+    atualizarResumo();
+
+    // Método de pagamento
+    let metodo = 'cartao';
+    document.querySelectorAll('.pay-methods button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        metodo = btn.dataset.method;
+        document.querySelectorAll('.pay-methods button').forEach(b => b.classList.toggle('active', b === btn));
+        $('metodo-cartao').classList.toggle('hidden', metodo !== 'cartao');
+        $('metodo-pix').classList.toggle('hidden', metodo !== 'pix');
+      });
+    });
+
+    // Máscaras
+    $('cartao').addEventListener('input', e => {
+      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 16).replace(/(\d{4})(?=\d)/g, '$1 ');
+    });
+    $('validade').addEventListener('input', e => {
+      let v = e.target.value.replace(/\D/g, '').slice(0, 4);
+      if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
+      e.target.value = v;
+    });
+    $('cvv').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4); });
+
+    // Validações
+    function luhn(num) {
+      let soma = 0, dobrar = false;
+      for (let i = num.length - 1; i >= 0; i--) {
+        let d = +num[i];
+        if (dobrar) { d *= 2; if (d > 9) d -= 9; }
+        soma += d; dobrar = !dobrar;
+      }
+      return num.length >= 13 && soma % 10 === 0;
+    }
+    function validadeOk(v) {
+      const m = v.match(/^(\d{2})\/(\d{2})$/);
+      if (!m) return false;
+      const mes = +m[1], ano = 2000 + +m[2];
+      if (mes < 1 || mes > 12) return false;
+      const fim = new Date(ano, mes, 0, 23, 59, 59);
+      return fim >= new Date();
+    }
+    function setErro(campo, msg) {
+      $(campo).classList.toggle('invalid', !!msg);
+      document.querySelector(`.error[data-for="${campo}"]`).textContent = msg || '';
+      return !msg;
+    }
+    function validar() {
+      let ok = true;
+      ok &= setErro('nome', $('nome').value.trim().length < 3 ? 'Informe seu nome completo.' : '');
+      ok &= setErro('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('email').value) ? '' : 'E-mail inválido.');
+      ok &= setErro('empresa', $('empresa').value.trim() ? '' : 'Informe o nome da sua marca.');
+      if (metodo === 'cartao') {
+        ok &= setErro('cartao', luhn($('cartao').value.replace(/\s/g, '')) ? '' : 'Número de cartão inválido.');
+        ok &= setErro('validade', validadeOk($('validade').value) ? '' : 'Validade inválida.');
+        ok &= setErro('cvv', /^\d{3,4}$/.test($('cvv').value) ? '' : 'CVV inválido.');
+      }
+      return !!ok;
+    }
+
+    /*
+     * Aprovação do pagamento.
+     * ATENÇÃO: aqui é uma simulação. Para cobrar de verdade, substitua esta função
+     * por uma chamada ao seu backend integrado a um gateway (Stripe, Mercado Pago,
+     * Pagar.me etc.) e só redirecione para a Brand quando o gateway confirmar.
+     */
+    function processarPagamento(dados) {
+      return new Promise(resolve => setTimeout(() => resolve({ aprovado: true, id: 'PED-' + Date.now() }), 1800));
+    }
+
+    $('checkout-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      if (!validar()) return;
+
+      const plano = $('plano').value;
+      const dados = {
+        nome: $('nome').value.trim(),
+        email: $('email').value.trim(),
+        empresa: $('empresa').value.trim(),
+        plano, valor: PLANOS[plano].preco, metodo,
+      };
+
+      $('pagar').disabled = true;
+      $('status').classList.remove('hidden');
+
+      const resultado = await processarPagamento(dados);
+      if (!resultado.aprovado) {
+        $('status').classList.add('hidden');
+        $('pagar').disabled = false;
+        alert('Pagamento recusado. Verifique os dados e tente novamente.');
+        return;
+      }
+
+      // Guarda o pedido aprovado para liberar a página Brand
+      const pedido = { ...dados, pedidoId: resultado.id, aprovadoEm: new Date().toISOString() };
+      try { sessionStorage.setItem('elevenlabs_pedido', JSON.stringify(pedido)); } catch (_) {}
+
+      $('status-processando').classList.add('hidden');
+      $('status-aprovado').classList.remove('hidden');
+      setTimeout(() => { location.href = 'brand.html'; }, 2500);
+    });
+  </script>
+</body>
+</html>
