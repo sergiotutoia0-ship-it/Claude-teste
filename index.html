@@ -2,181 +2,104 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Eleven Labs — Vozes com Inteligência Artificial</title>
-  <meta name="description" content="Eleven Labs: vozes realistas com IA, clonagem de voz, dublagem e agentes de voz para a sua marca." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lume Labs | Vídeos 3D que fazem seu negócio aparecer</title>
+  <meta name="description" content="Reels 3D personalizados com narração e a cara da sua marca." />
+  <meta property="og:title" content="Lume Labs | Vídeos 3D para Instagram" />
+  <meta property="og:description" content="Reels 3D personalizados com narração e a identidade da sua marca." />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">Eleven<span>Labs</span></a>
-      <nav class="nav">
-        <a href="#servicos">Serviços</a>
-        <a href="#video">Vídeo</a>
-        <a href="#planos">Planos</a>
-        <a href="#como-funciona">Como funciona</a>
-        <a href="checkout.html?plano=pro" class="btn btn-primary">Começar agora</a>
-      </nav>
-    </div>
-  </header>
-
   <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="container">
-        <span class="badge">🎙️ Inteligência artificial de voz</span>
-        <h1>Dê <span class="gradient">voz</span> à sua marca com IA</h1>
-        <p>Criamos vozes realistas, clonamos a voz do seu porta-voz, dublamos seus vídeos em vários idiomas e colocamos agentes de voz para atender seus clientes 24h.</p>
-        <div class="hero-actions">
-          <a href="#planos" class="btn btn-primary">Ver planos</a>
-          <a href="#video" class="btn btn-ghost">▶ Assistir vídeo</a>
-        </div>
+    <!-- TOPO + VÍDEO -->
+    <section class="hero wrap center">
+      <div class="top"><img src="assets/logo-lume-labs.png" alt="Lume Labs" /></div>
+      <p class="label" style="margin-top:16px">Sua marca em outra dimensão</p>
+      <h1>Vídeos <span class="text-neon">3D</span> para o seu negócio</h1>
+      <p class="lead">Personagens, narração e a identidade da sua marca. Um vídeo feito para chamar atenção.</p>
+
+      <div class="video-box">
+        <video id="video" src="assets/video-lume-labs.mp4" poster="assets/video-poster.jpg"
+               autoplay muted loop playsinline preload="metadata"></video>
+        <button type="button" class="sound-btn" id="som">🔇 Ativar som</button>
       </div>
+
+      <a href="checkout.html" class="cta">Quero meu vídeo · R$ 29,90 ↗</a>
+      <p class="secure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        Pagamento único · Pix pelo Mercado Pago
+      </p>
+      <a href="#servico" class="scroll-hint">Role para ver mais
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+      </a>
     </section>
 
-    <!-- VÍDEO -->
-    <section id="video">
-      <div class="container">
-        <div class="section-title">
-          <h2>Veja a Eleven Labs em ação</h2>
-          <p>Um minuto para entender como transformamos texto em voz de verdade.</p>
-        </div>
-        <div class="video-wrap">
-          <!--
-            TROQUE O VÍDEO AQUI:
-            - Arquivo próprio: coloque o arquivo em assets/ e altere o src abaixo (ex.: assets/apresentacao.mp4)
-            - YouTube: substitua o <video> por
-              <iframe src="https://www.youtube.com/embed/SEU_ID" allowfullscreen></iframe>
-          -->
-          <video controls playsinline preload="metadata"
-                 poster="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=1280&q=80">
-            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
-            Seu navegador não suporta vídeo.
-          </video>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVIÇOS -->
-    <section id="servicos">
-      <div class="container">
-        <div class="section-title">
-          <h2>O que nós fazemos</h2>
-          <p>Soluções completas de áudio com IA para empresas e criadores.</p>
-        </div>
-        <div class="grid">
-          <div class="card">
-            <div class="icon">🗣️</div>
-            <h3>Texto para Fala</h3>
-            <p>Transforme qualquer texto em narração natural, com emoção e entonação, em mais de 30 idiomas.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🧬</div>
-            <h3>Clonagem de Voz</h3>
-            <p>Crie uma réplica fiel da voz do seu porta-voz para usar em anúncios, cursos e conteúdos.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🌎</div>
-            <h3>Dublagem com IA</h3>
-            <p>Traduza e duble vídeos mantendo a voz original. Leve seu conteúdo para o mundo todo.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🤖</div>
-            <h3>Agentes de Voz</h3>
-            <p>Atendentes virtuais que falam com seus clientes por telefone, site ou WhatsApp, 24 horas por dia.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🎧</div>
-            <h3>Audiobooks e Podcasts</h3>
-            <p>Produza livros e episódios completos em horas, não semanas, com qualidade de estúdio.</p>
-          </div>
-          <div class="card">
-            <div class="icon">🎨</div>
-            <h3>Identidade Sonora</h3>
-            <p>Desenvolvemos a voz oficial da sua marca para que ela seja reconhecida em qualquer canal.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PLANOS -->
-    <section id="planos">
-      <div class="container">
-        <div class="section-title">
-          <h2>Escolha seu plano</h2>
-          <p>Pagamento seguro. Após a aprovação você já configura a sua marca.</p>
-        </div>
-        <div class="grid">
-          <div class="card plan">
-            <h3>Starter</h3>
-            <div class="price">R$ 97<small>/mês</small></div>
-            <ul>
-              <li>100 mil caracteres/mês</li>
-              <li>Texto para fala</li>
-              <li>10 vozes prontas</li>
-              <li>Suporte por e-mail</li>
-            </ul>
-            <a href="checkout.html?plano=starter" class="btn btn-ghost btn-block">Assinar Starter</a>
-          </div>
-          <div class="card plan featured">
-            <span class="badge" style="margin-bottom:0">Mais escolhido</span>
-            <h3 style="margin-top:12px">Pro</h3>
-            <div class="price">R$ 297<small>/mês</small></div>
-            <ul>
-              <li>500 mil caracteres/mês</li>
-              <li>Clonagem de voz</li>
-              <li>Dublagem em 30+ idiomas</li>
-              <li>Kit de marca (Brand)</li>
-              <li>Suporte prioritário</li>
-            </ul>
-            <a href="checkout.html?plano=pro" class="btn btn-primary btn-block">Assinar Pro</a>
-          </div>
-          <div class="card plan">
-            <h3>Business</h3>
-            <div class="price">R$ 997<small>/mês</small></div>
-            <ul>
-              <li>Caracteres ilimitados</li>
-              <li>Agentes de voz 24h</li>
-              <li>Identidade sonora exclusiva</li>
-              <li>Gerente de conta dedicado</li>
-            </ul>
-            <a href="checkout.html?plano=business" class="btn btn-ghost btn-block">Assinar Business</a>
-          </div>
-        </div>
+    <!-- O SERVIÇO -->
+    <section id="servico" class="block wrap-wide">
+      <p class="label center">O que a gente faz</p>
+      <h2>Reels 3D com a cara da sua marca</h2>
+      <p class="muted center small" style="max-width:460px;margin:8px auto 0">
+        Criamos um vídeo animado em 3D para o seu negócio aparecer no Instagram: personagem, narração e roteiro pensados para vender.
+      </p>
+      <div class="services">
+        <div class="service"><div class="ic">🧊</div><h3>Animação 3D</h3><p>Personagens e cenários 3D que prendem a atenção nos primeiros segundos.</p></div>
+        <div class="service"><div class="ic">🎙️</div><h3>Narração</h3><p>Voz masculina ou feminina falando a mensagem do seu negócio.</p></div>
+        <div class="service"><div class="ic">🎨</div><h3>Sua identidade</h3><p>Logo, cores e o jeito da sua marca em cada cena.</p></div>
+        <div class="service"><div class="ic">📱</div><h3>Pronto pra postar</h3><p>Vertical 9:16 para Reels, Stories e TikTok, entregue no WhatsApp.</p></div>
       </div>
     </section>
 
     <!-- COMO FUNCIONA -->
-    <section id="como-funciona">
-      <div class="container">
-        <div class="section-title">
-          <h2>Como funciona</h2>
-        </div>
-        <div class="steps">
-          <div class="step"><h3>Escolha o plano</h3><p>Selecione o plano ideal para o seu negócio.</p></div>
-          <div class="step"><h3>Checkout</h3><p>Pague com cartão ou Pix de forma segura.</p></div>
-          <div class="step"><h3>Pagamento aprovado</h3><p>A aprovação é confirmada na hora.</p></div>
-          <div class="step"><h3>Configure sua Brand</h3><p>Defina logo, cores e a voz oficial da sua marca.</p></div>
-        </div>
+    <section id="como-funciona" class="block wrap-wide">
+      <p class="label center">Como funciona</p>
+      <h2>3 passos simples</h2>
+      <div class="steps">
+        <div class="step"><span class="n">01</span><div><h3>Contrate</h3><p>Preencha seus dados e faça o pagamento no checkout.</p></div></div>
+        <div class="step"><span class="n">02</span><div><h3>Conte sobre a sua marca</h3><p>Pagamento aprovado, você vai para a Brand: marca, cores e o que o vídeo deve falar.</p></div></div>
+        <div class="step"><span class="n">03</span><div><h3>Receba o vídeo</h3><p>Criamos seu reels 3D e enviamos pronto pelo WhatsApp.</p></div></div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section>
-      <div class="container">
-        <div class="cta">
-          <h2>Pronto para dar voz à sua marca?</h2>
-          <p>Comece hoje e tenha sua primeira narração em minutos.</p>
-          <a href="checkout.html?plano=pro" class="btn btn-primary">Ir para o checkout →</a>
-        </div>
+    <!-- PLANO -->
+    <section id="plano" class="block wrap">
+      <h2>Plano</h2>
+      <div class="card featured" style="margin-top:20px">
+        <h3 style="font-size:1.5rem">Vídeo 3D único</h3>
+        <p class="price text-neon">R$ 29,90</p>
+        <ul class="checks">
+          <li>Reels 3D de 15 s, 25 s ou 30 s</li>
+          <li>Narração com voz masculina ou feminina</li>
+          <li>Cores, logo e identidade da sua marca</li>
+          <li>Formato vertical pronto para Instagram</li>
+        </ul>
+        <a href="checkout.html" class="cta">Contratar meu vídeo ↗</a>
+      </div>
+    </section>
+
+    <!-- DÚVIDAS -->
+    <section class="block wrap">
+      <h2>Dúvidas</h2>
+      <div style="margin-top:12px">
+        <details><summary>Em quanto tempo recebo?<span>+</span></summary><p>Assim que o briefing chega, começamos a produção e mantemos você atualizado pelo WhatsApp.</p></details>
+        <details><summary>Posso usar a logo e as cores da minha empresa?<span>+</span></summary><p>Sim! O vídeo é feito com a identidade da sua marca.</p></details>
+        <details><summary>Qual o formato?<span>+</span></summary><p>Vertical (9:16), pronto para Reels, Stories e TikTok.</p></details>
+        <details><summary>Como pago?<span>+</span></summary><p>Pagamento único por Pix, pelo Mercado Pago. Aprovou, você já preenche o briefing da sua marca.</p></details>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <div class="container">© <span id="ano"></span> Eleven Labs. Todos os direitos reservados.</div>
-  </footer>
-  <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
+  <script src="assets/common.js"></script>
+  <script>
+    const v = document.getElementById('video'), b = document.getElementById('som');
+    b.addEventListener('click', () => {
+      v.muted = !v.muted;
+      if (!v.muted) { v.currentTime = 0; v.play(); }
+      b.textContent = v.muted ? '🔇 Ativar som' : '🔊 Som ativado';
+    });
+  </script>
 </body>
 </html>

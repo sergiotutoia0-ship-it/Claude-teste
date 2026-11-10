@@ -2,241 +2,206 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout — Eleven Labs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout | Lume Labs</title>
+  <meta name="description" content="Finalize seu pedido do Vídeo 3D único por R$ 29,90." />
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">Eleven<span>Labs</span></a>
-      <nav class="nav"><a href="index.html#planos">← Voltar aos planos</a></nav>
-    </div>
-  </header>
+  <main class="wrap">
+    <div class="top"><a href="index.html" class="back">← Voltar</a><img src="assets/logo-lume-labs.png" alt="Lume Labs" /></div>
 
-  <main>
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <h2>Finalizar assinatura</h2>
-          <p>Etapa 1 de 2 — Pagamento. Em seguida você configura sua Brand.</p>
-        </div>
+    <ol class="progress" id="progress">
+      <li class="on">1. Seus dados</li>
+      <li>2. Pagamento</li>
+      <li>3. Brand</li>
+    </ol>
 
-        <div class="layout-2">
-          <!-- FORMULÁRIO -->
-          <form id="checkout-form" class="card" novalidate>
-            <h3 style="margin-bottom:16px">Seus dados</h3>
-            <div class="form-group">
-              <label for="nome">Nome completo</label>
-              <input id="nome" name="nome" autocomplete="name" required />
-              <div class="error" data-for="nome"></div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="email">E-mail</label>
-                <input id="email" name="email" type="email" autocomplete="email" required />
-                <div class="error" data-for="email"></div>
-              </div>
-              <div class="form-group">
-                <label for="empresa">Empresa / Marca</label>
-                <input id="empresa" name="empresa" autocomplete="organization" required />
-                <div class="error" data-for="empresa"></div>
-              </div>
-            </div>
-
-            <h3 style="margin:8px 0 16px">Pagamento</h3>
-            <div class="pay-methods">
-              <button type="button" data-method="cartao" class="active">💳 Cartão</button>
-              <button type="button" data-method="pix">⚡ Pix</button>
-            </div>
-
-            <div id="metodo-cartao">
-              <div class="form-group">
-                <label for="cartao">Número do cartão</label>
-                <input id="cartao" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000" maxlength="19" />
-                <div class="error" data-for="cartao"></div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label for="validade">Validade</label>
-                  <input id="validade" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/AA" maxlength="5" />
-                  <div class="error" data-for="validade"></div>
-                </div>
-                <div class="form-group">
-                  <label for="cvv">CVV</label>
-                  <input id="cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" />
-                  <div class="error" data-for="cvv"></div>
-                </div>
-              </div>
-            </div>
-
-            <div id="metodo-pix" class="hidden">
-              <p style="color:var(--muted);margin-bottom:16px">
-                Ao clicar em pagar, geraremos o código Pix. A aprovação é confirmada automaticamente.
-              </p>
-            </div>
-
-            <button type="submit" class="btn btn-primary btn-block" id="pagar">Pagar e continuar</button>
-            <p class="secure">🔒 Pagamento criptografado e seguro</p>
-          </form>
-
-          <!-- RESUMO -->
-          <aside class="card">
-            <h3 style="margin-bottom:16px">Resumo do pedido</h3>
-            <div class="form-group">
-              <label for="plano">Plano</label>
-              <select id="plano">
-                <option value="starter">Starter</option>
-                <option value="pro">Pro</option>
-                <option value="business">Business</option>
-              </select>
-            </div>
-            <div class="summary-line"><span id="resumo-nome">Plano</span><span id="resumo-preco">—</span></div>
-            <div class="summary-line"><span>Desconto</span><span>R$ 0,00</span></div>
-            <div class="summary-line total"><span>Total hoje</span><span id="resumo-total">—</span></div>
-            <p class="secure">Cobrança mensal. Cancele quando quiser.</p>
-          </aside>
-        </div>
+    <!-- ETAPA 1: DADOS -->
+    <div id="etapa-dados">
+      <div class="page-title">
+        <p class="label">Sua marca começa a ganhar vida</p>
+        <h1>Finalize seu pedido</h1>
+        <p>Leva menos de 1 minuto. Seus dados ficam protegidos e são usados só para o seu pedido.</p>
       </div>
-    </section>
+
+      <div class="card featured summary">
+        <div class="row"><h3 style="font-size:1.3rem">Vídeo 3D único</h3><span class="text-neon" style="font-family:var(--font-display);font-size:1.3rem">R$ 29,90</span></div>
+        <ul class="checks small">
+          <li>Reels 3D de 15 s, 25 s ou 30 s</li>
+          <li>Narração com voz masculina ou feminina</li>
+          <li>Cores, logo e identidade da sua marca</li>
+          <li>Formato vertical pronto para Instagram</li>
+        </ul>
+        <div class="row total"><span class="muted small">Total · pagamento único</span><strong>R$ 29,90</strong></div>
+      </div>
+
+      <form id="form-dados" novalidate>
+        <div class="field">
+          <label for="nome">Nome completo</label>
+          <input id="nome" autocomplete="name" />
+          <p class="hint">Como aparece no seu documento.</p>
+          <p class="err" data-err="nome"></p>
+        </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" inputmode="email" autocomplete="email" />
+          <p class="hint">Seu contato para informações do pedido.</p>
+          <p class="err" data-err="email"></p>
+        </div>
+        <div class="field">
+          <label for="whatsapp">WhatsApp</label>
+          <input id="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(98) 98414-1843" />
+          <p class="hint">Com DDD. Usamos para enviar seu vídeo.</p>
+          <p class="err" data-err="whatsapp"></p>
+        </div>
+        <button type="submit" class="cta">Continuar para pagamento</button>
+        <p class="secure">🔒 Ao continuar você concorda com os termos e a privacidade.</p>
+      </form>
+    </div>
+
+    <!-- ETAPA 2: PIX -->
+    <div id="etapa-pix" class="hidden">
+      <div class="page-title">
+        <p class="label">Pagamento seguro</p>
+        <h1>Pague com Pix</h1>
+        <p>Abra o app do seu banco, escaneie o QR Code ou use o Pix copia e cola.</p>
+      </div>
+      <div class="card featured pix-box">
+        <div class="row" style="display:flex;justify-content:space-between"><span class="muted small">Total</span><strong style="font-family:var(--font-display);font-size:1.5rem;font-weight:400">R$ 29,90</strong></div>
+        <div class="qr" id="qr" aria-label="QR Code Pix"></div>
+        <p class="small muted">Pix copia e cola</p>
+        <div class="copy-row">
+          <input id="pix-code" readonly />
+          <button type="button" class="btn-outline" id="copiar">Copiar</button>
+        </div>
+        <div class="waiting" id="aguardando"><span class="spinner"></span>Aguardando confirmação do pagamento…</div>
+      </div>
+      <p class="secure">🔒 Pix pelo Mercado Pago · aprovação automática</p>
+      <p class="demo-note" id="demo-note">Modo demonstração: o pagamento é aprovado sozinho em alguns segundos. Ligue o Mercado Pago em <code>checkout.html</code> para cobrar de verdade.</p>
+    </div>
+
+    <!-- APROVADO -->
+    <div id="etapa-ok" class="hidden">
+      <div class="approved">
+        <div class="ok">✓</div>
+        <p class="label">Pedido <span id="ok-id"></span></p>
+        <h2>Pagamento aprovado!</h2>
+        <p class="muted" style="margin-top:8px">Agora conte sobre a sua marca para começarmos o seu vídeo.</p>
+        <a href="brand.html" class="cta">Ir para a Brand →</a>
+        <p class="muted small" style="margin-top:10px">Redirecionando automaticamente…</p>
+      </div>
+    </div>
   </main>
 
-  <!-- STATUS DO PAGAMENTO -->
-  <div class="status hidden" id="status">
-    <div class="status-box">
-      <div id="status-processando">
-        <div class="spinner"></div>
-        <h3>Processando pagamento…</h3>
-        <p style="color:var(--muted)">Não feche esta página.</p>
-      </div>
-      <div id="status-aprovado" class="hidden">
-        <div class="check">✓</div>
-        <h3>Pagamento aprovado!</h3>
-        <p style="color:var(--muted);margin:8px 0 20px">Redirecionando para a configuração da sua Brand…</p>
-        <a href="brand.html" class="btn btn-primary btn-block">Ir para Brand agora</a>
-      </div>
-    </div>
-  </div>
-
+  <script src="assets/common.js"></script>
   <script>
-    const PLANOS = {
-      starter:  { nome: 'Plano Starter',  preco: 97 },
-      pro:      { nome: 'Plano Pro',      preco: 297 },
-      business: { nome: 'Plano Business', preco: 997 },
-    };
-    const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    const $ = id => document.getElementById(id);
+    /*
+     * ============ INTEGRAÇÃO DE PAGAMENTO ============
+     * DEMO = true  -> simula o Pix e aprova sozinho (para testar o fluxo).
+     * DEMO = false -> chama o seu backend, que fala com o Mercado Pago:
+     *   POST /api/pix            body {nome,email,whatsapp} -> {pedidoId, qrCodeBase64, copiaECola}
+     *   GET  /api/pix/:pedidoId  -> {status: 'pending' | 'approved' | 'rejected'}
+     * A chave secreta do Mercado Pago fica SÓ no backend, nunca nesta página.
+     */
+    const DEMO = true;
 
-    // Plano vindo da URL (?plano=pro)
-    const planoUrl = new URLSearchParams(location.search).get('plano');
-    $('plano').value = PLANOS[planoUrl] ? planoUrl : 'pro';
-    function atualizarResumo() {
-      const p = PLANOS[$('plano').value];
-      $('resumo-nome').textContent = p.nome;
-      $('resumo-preco').textContent = brl(p.preco);
-      $('resumo-total').textContent = brl(p.preco);
-    }
-    $('plano').addEventListener('change', atualizarResumo);
-    atualizarResumo();
-
-    // Método de pagamento
-    let metodo = 'cartao';
-    document.querySelectorAll('.pay-methods button').forEach(btn => {
-      btn.addEventListener('click', () => {
-        metodo = btn.dataset.method;
-        document.querySelectorAll('.pay-methods button').forEach(b => b.classList.toggle('active', b === btn));
-        $('metodo-cartao').classList.toggle('hidden', metodo !== 'cartao');
-        $('metodo-pix').classList.toggle('hidden', metodo !== 'pix');
-      });
-    });
-
-    // Máscaras
-    $('cartao').addEventListener('input', e => {
-      e.target.value = e.target.value.replace(/\D/g, '').slice(0, 16).replace(/(\d{4})(?=\d)/g, '$1 ');
-    });
-    $('validade').addEventListener('input', e => {
-      let v = e.target.value.replace(/\D/g, '').slice(0, 4);
-      if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
-      e.target.value = v;
-    });
-    $('cvv').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 4); });
-
-    // Validações
-    function luhn(num) {
-      let soma = 0, dobrar = false;
-      for (let i = num.length - 1; i >= 0; i--) {
-        let d = +num[i];
-        if (dobrar) { d *= 2; if (d > 9) d -= 9; }
-        soma += d; dobrar = !dobrar;
+    async function criarPix(dados) {
+      if (DEMO) {
+        const pedidoId = 'LL-' + Date.now().toString(36).toUpperCase();
+        return { pedidoId, qrCodeBase64: null, copiaECola: '00020126DEMO-LUMELABS-' + pedidoId + '5204000053039865406' + LUME.preco.toFixed(2) + '5802BR' };
       }
-      return num.length >= 13 && soma % 10 === 0;
+      const r = await fetch('/api/pix', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(dados) });
+      if (!r.ok) throw new Error('Falha ao gerar Pix');
+      return r.json();
     }
-    function validadeOk(v) {
-      const m = v.match(/^(\d{2})\/(\d{2})$/);
-      if (!m) return false;
-      const mes = +m[1], ano = 2000 + +m[2];
-      if (mes < 1 || mes > 12) return false;
-      const fim = new Date(ano, mes, 0, 23, 59, 59);
-      return fim >= new Date();
+
+    async function statusPix(pedidoId, inicio) {
+      if (DEMO) return Date.now() - inicio > 4000 ? 'approved' : 'pending';
+      const r = await fetch('/api/pix/' + encodeURIComponent(pedidoId));
+      return r.ok ? (await r.json()).status : 'pending';
     }
-    function setErro(campo, msg) {
-      $(campo).classList.toggle('invalid', !!msg);
-      document.querySelector(`.error[data-for="${campo}"]`).textContent = msg || '';
+    // ================================================
+
+    const $ = id => document.getElementById(id);
+    if (!DEMO) $('demo-note').classList.add('hidden');
+
+    // Máscara do WhatsApp: (98) 98414-1843
+    const digitos = s => s.replace(/\D/g, '');
+    $('whatsapp').addEventListener('input', e => {
+      const t = digitos(e.target.value).slice(0, 11);
+      e.target.value = t.length <= 2 ? (t ? `(${t}` : '') : t.length <= 7 ? `(${t.slice(0,2)}) ${t.slice(2)}` : `(${t.slice(0,2)}) ${t.slice(2,7)}-${t.slice(7)}`;
+    });
+
+    function erro(campo, msg) {
+      $(campo).setAttribute('aria-invalid', msg ? 'true' : 'false');
+      document.querySelector(`[data-err="${campo}"]`).textContent = msg || '';
       return !msg;
     }
-    function validar() {
-      let ok = true;
-      ok &= setErro('nome', $('nome').value.trim().length < 3 ? 'Informe seu nome completo.' : '');
-      ok &= setErro('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('email').value) ? '' : 'E-mail inválido.');
-      ok &= setErro('empresa', $('empresa').value.trim() ? '' : 'Informe o nome da sua marca.');
-      if (metodo === 'cartao') {
-        ok &= setErro('cartao', luhn($('cartao').value.replace(/\s/g, '')) ? '' : 'Número de cartão inválido.');
-        ok &= setErro('validade', validadeOk($('validade').value) ? '' : 'Validade inválida.');
-        ok &= setErro('cvv', /^\d{3,4}$/.test($('cvv').value) ? '' : 'CVV inválido.');
+
+    function etapa(n) {
+      $('etapa-dados').classList.toggle('hidden', n !== 1);
+      $('etapa-pix').classList.toggle('hidden', n !== 2);
+      $('etapa-ok').classList.toggle('hidden', n !== 3);
+      [...$('progress').children].forEach((li, i) => {
+        li.classList.toggle('on', i + 1 === n);
+        li.classList.toggle('done', i + 1 < n);
+      });
+      scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // QR decorativo enquanto não há QR real do Mercado Pago
+    function qrDemo(texto) {
+      let h = 0; for (const c of texto) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+      const n = 25, cel = [];
+      const finder = (x, y) => [[0,0],[n-7,0],[0,n-7]].some(([a,b]) => x>=a && x<a+7 && y>=b && y<b+7);
+      const finderOn = (x, y) => { for (const [a,b] of [[0,0],[n-7,0],[0,n-7]]) { if (x>=a&&x<a+7&&y>=b&&y<b+7) { const dx=x-a, dy=y-b; return dx===0||dx===6||dy===0||dy===6||(dx>=2&&dx<=4&&dy>=2&&dy<=4); } } return false; };
+      for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+        h = (h * 1103515245 + 12345) >>> 0;
+        const on = finder(x, y) ? finderOn(x, y) : (h >> 16) & 1;
+        if (on) cel.push(`<rect x="${x}" y="${y}" width="1" height="1"/>`);
       }
-      return !!ok;
+      return `<svg viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges" fill="#000">${cel.join('')}</svg>`;
     }
 
-    /*
-     * Aprovação do pagamento.
-     * ATENÇÃO: aqui é uma simulação. Para cobrar de verdade, substitua esta função
-     * por uma chamada ao seu backend integrado a um gateway (Stripe, Mercado Pago,
-     * Pagar.me etc.) e só redirecione para a Brand quando o gateway confirmar.
-     */
-    function processarPagamento(dados) {
-      return new Promise(resolve => setTimeout(() => resolve({ aprovado: true, id: 'PED-' + Date.now() }), 1800));
-    }
-
-    $('checkout-form').addEventListener('submit', async e => {
+    $('form-dados').addEventListener('submit', async e => {
       e.preventDefault();
-      if (!validar()) return;
+      const dados = { nome: $('nome').value.trim(), email: $('email').value.trim(), whatsapp: digitos($('whatsapp').value) };
+      let ok = erro('nome', dados.nome.length >= 3 ? '' : 'Digite seu nome completo');
+      ok = erro('email', /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(dados.email) ? '' : 'E-mail inválido') && ok;
+      ok = erro('whatsapp', [10, 11].includes(dados.whatsapp.length) ? '' : 'WhatsApp com DDD, ex.: (98) 98414-1843') && ok;
+      if (!ok) return;
 
-      const plano = $('plano').value;
-      const dados = {
-        nome: $('nome').value.trim(),
-        email: $('email').value.trim(),
-        empresa: $('empresa').value.trim(),
-        plano, valor: PLANOS[plano].preco, metodo,
-      };
+      const btn = e.submitter; btn.disabled = true; btn.textContent = 'Gerando Pix…';
+      let pix;
+      try { pix = await criarPix(dados); }
+      catch (_) { btn.disabled = false; btn.textContent = 'Continuar para pagamento'; alert('Não foi possível gerar o Pix. Tente novamente.'); return; }
 
-      $('pagar').disabled = true;
-      $('status').classList.remove('hidden');
+      $('qr').innerHTML = pix.qrCodeBase64 ? `<img src="data:image/png;base64,${pix.qrCodeBase64}" alt="QR Code Pix">` : qrDemo(pix.copiaECola);
+      $('pix-code').value = pix.copiaECola;
+      etapa(2);
 
-      const resultado = await processarPagamento(dados);
-      if (!resultado.aprovado) {
-        $('status').classList.add('hidden');
-        $('pagar').disabled = false;
-        alert('Pagamento recusado. Verifique os dados e tente novamente.');
-        return;
-      }
+      const inicio = Date.now();
+      const timer = setInterval(async () => {
+        const s = await statusPix(pix.pedidoId, inicio);
+        if (s === 'pending') return;
+        clearInterval(timer);
+        if (s !== 'approved') { alert('Pagamento não aprovado. Tente novamente.'); location.reload(); return; }
+        Pedido.set({ ...dados, pedidoId: pix.pedidoId, valor: LUME.preco, produto: LUME.produto, aprovadoEm: new Date().toISOString() });
+        $('ok-id').textContent = pix.pedidoId;
+        etapa(3);
+        setTimeout(() => location.href = 'brand.html', 3000);
+      }, 1500);
+    });
 
-      // Guarda o pedido aprovado para liberar a página Brand
-      const pedido = { ...dados, pedidoId: resultado.id, aprovadoEm: new Date().toISOString() };
-      try { sessionStorage.setItem('elevenlabs_pedido', JSON.stringify(pedido)); } catch (_) {}
-
-      $('status-processando').classList.add('hidden');
-      $('status-aprovado').classList.remove('hidden');
-      setTimeout(() => { location.href = 'brand.html'; }, 2500);
+    $('copiar').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText($('pix-code').value); } catch (_) { $('pix-code').select(); document.execCommand('copy'); }
+      $('copiar').textContent = 'Copiado!';
+      setTimeout(() => $('copiar').textContent = 'Copiar', 2000);
     });
   </script>
 </body>

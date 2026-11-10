@@ -2,206 +2,187 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sua Brand — Eleven Labs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brand | Lume Labs</title>
+  <link rel="icon" href="assets/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap" />
   <link rel="stylesheet" href="assets/style.css" />
   <script>
-    // Só entra na Brand quem teve o pagamento aprovado no checkout
-    (function () {
-      try {
-        if (!sessionStorage.getItem('elevenlabs_pedido')) location.replace('checkout.html');
-      } catch (_) { /* armazenamento bloqueado: deixa seguir */ }
-    })();
+    // A Brand só abre depois do pagamento aprovado no checkout
+    try { if (!sessionStorage.getItem('lume_pedido')) location.replace('checkout.html'); } catch (_) {}
   </script>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <a href="index.html" class="logo">Eleven<span>Labs</span></a>
-      <nav class="nav"><span id="pedido-tag" class="badge" style="margin:0"></span></nav>
-    </div>
-  </header>
+  <main class="wrap">
+    <div class="top"><img src="assets/logo-lume-labs.png" alt="Lume Labs" /></div>
 
-  <main>
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <span class="badge">✓ Pagamento aprovado</span>
-          <h2>Bem-vindo(a), <span class="gradient" id="ola-nome">cliente</span>!</h2>
-          <p>Etapa 2 de 2 — Configure a Brand da <strong id="ola-empresa">sua empresa</strong> para usarmos em todas as vozes e conteúdos.</p>
-        </div>
+    <ol class="progress">
+      <li class="done">1. Seus dados</li>
+      <li class="done">2. Pagamento</li>
+      <li class="on">3. Brand</li>
+    </ol>
 
-        <div class="layout-2">
-          <!-- FORM DA BRAND -->
-          <form id="brand-form" class="card">
-            <h3 style="margin-bottom:16px">Identidade da marca</h3>
-            <div class="form-group">
-              <label for="marca">Nome da marca</label>
-              <input id="marca" required />
-            </div>
-            <div class="form-group">
-              <label for="slogan">Slogan</label>
-              <input id="slogan" placeholder="Ex.: A voz que vende por você" />
-            </div>
-            <div class="form-group">
-              <label for="logo">Logo (PNG, JPG ou SVG)</label>
-              <input id="logo" type="file" accept="image/*" />
-            </div>
-            <div class="form-group">
-              <label>Cores da marca</label>
-              <div class="color-row">
-                <input id="cor1" type="color" value="#7c5cff" aria-label="Cor principal" />
-                <input id="cor2" type="color" value="#00d4b4" aria-label="Cor secundária" />
-              </div>
-            </div>
-
-            <h3 style="margin:8px 0 16px">Voz oficial</h3>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="voz">Estilo de voz</label>
-                <select id="voz">
-                  <option>Feminina — calorosa</option>
-                  <option>Feminina — profissional</option>
-                  <option>Masculina — grave</option>
-                  <option>Masculina — jovem</option>
-                  <option>Clonar a voz do porta-voz</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="tom">Tom de comunicação</label>
-                <select id="tom">
-                  <option>Amigável</option>
-                  <option>Confiante</option>
-                  <option>Sofisticado</option>
-                  <option>Divertido</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="idiomas">Idiomas</label>
-              <input id="idiomas" value="Português, Inglês, Espanhol" />
-            </div>
-            <div class="form-group">
-              <label for="frase">Frase de teste da voz</label>
-              <textarea id="frase" rows="3">Olá! Seja bem-vindo. Como posso te ajudar hoje?</textarea>
-            </div>
-
-            <button type="button" class="btn btn-ghost btn-block" id="ouvir" style="margin-bottom:12px">🔊 Ouvir prévia</button>
-            <button type="submit" class="btn btn-primary btn-block">Salvar minha Brand</button>
-          </form>
-
-          <!-- PRÉVIA -->
-          <aside>
-            <div class="card" style="margin-bottom:20px">
-              <h3 style="margin-bottom:16px">Prévia</h3>
-              <div class="preview-card" id="preview">
-                <div class="preview-logo" id="pv-logo">E</div>
-                <div>
-                  <h2 id="pv-marca" style="font-size:1.8rem">Sua marca</h2>
-                  <p id="pv-slogan" style="opacity:.85">Seu slogan aparece aqui</p>
-                  <p id="pv-voz" style="opacity:.7;font-size:.85rem;margin-top:12px"></p>
-                </div>
-              </div>
-            </div>
-            <div class="card">
-              <h3 style="margin-bottom:12px">Seu pedido</h3>
-              <div class="summary-line"><span>Pedido</span><span id="pd-id">—</span></div>
-              <div class="summary-line"><span>Plano</span><span id="pd-plano">—</span></div>
-              <div class="summary-line"><span>E-mail</span><span id="pd-email">—</span></div>
-              <div class="summary-line total"><span>Pago</span><span id="pd-valor">—</span></div>
-            </div>
-          </aside>
-        </div>
+    <div id="etapa-brand">
+      <div class="page-title">
+        <p class="label">✓ Pagamento aprovado · <span id="pedido-id"></span></p>
+        <h1>Conte sobre a sua <span class="text-neon">marca</span></h1>
+        <p><span id="ola">Olá!</span> Com essas informações criamos o seu reels 3D com a cara do seu negócio.</p>
       </div>
-    </section>
+
+      <form id="form-brand" novalidate>
+        <div class="field">
+          <label for="company">Nome da empresa</label>
+          <input id="company" autocomplete="organization" />
+          <p class="err" data-err="company"></p>
+        </div>
+        <div class="field">
+          <label for="segment">Ramo do negócio</label>
+          <input id="segment" placeholder="Ex.: hamburgueria, salão de beleza, loja de roupas" />
+          <p class="err" data-err="segment"></p>
+        </div>
+
+        <div class="field">
+          <label>Duração do vídeo</label>
+          <div class="choices">
+            <input type="radio" name="duration" id="d15" value="15s" checked /><label for="d15">15 s</label>
+            <input type="radio" name="duration" id="d25" value="25s" /><label for="d25">25 s</label>
+            <input type="radio" name="duration" id="d30" value="30s" /><label for="d30">30 s</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Voz da narração</label>
+          <div class="choices">
+            <input type="radio" name="voice" id="vf" value="feminina" checked /><label for="vf">Feminina</label>
+            <input type="radio" name="voice" id="vm" value="masculina" /><label for="vm">Masculina</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Logo da marca</label>
+          <label class="logo-drop" for="logo" style="font-weight:400;margin:0">
+            <span class="thumb" id="logo-thumb">＋</span>
+            <span><span id="logo-nome">Escolher arquivo</span><br><span class="muted small">PNG, JPG ou SVG. Você envia no WhatsApp junto com o briefing.</span></span>
+            <input id="logo" type="file" accept="image/*" />
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="colors">Cores da marca</label>
+          <input id="colors" placeholder="Ex.: roxo e preto, #7c3aed" />
+        </div>
+        <div class="field">
+          <label for="script">O que o vídeo deve falar?</label>
+          <textarea id="script" placeholder="Ex.: Apresentar o novo combo da casa, falar do delivery e chamar para pedir pelo WhatsApp."></textarea>
+          <p class="hint">Produto, promoção, diferencial, chamada para ação…</p>
+          <p class="err" data-err="script"></p>
+        </div>
+        <div class="field">
+          <label for="instagram">Instagram da empresa <span class="muted small">(opcional)</span></label>
+          <input id="instagram" placeholder="@suaempresa" />
+        </div>
+        <div class="field">
+          <label for="notes">Observações <span class="muted small">(opcional)</span></label>
+          <textarea id="notes" style="min-height:80px"></textarea>
+        </div>
+
+        <button type="submit" class="cta">Enviar briefing</button>
+        <p class="secure">Você será levado ao WhatsApp para confirmar o envio.</p>
+      </form>
+    </div>
+
+    <div id="etapa-fim" class="hidden">
+      <div class="approved">
+        <div class="ok">🎬</div>
+        <h2>Briefing recebido!</h2>
+        <p class="muted" style="margin-top:8px">Já começamos a produção do seu vídeo 3D. Você vai receber as novidades e o vídeo pronto no WhatsApp.</p>
+        <a id="wa-again" class="cta" target="_blank" rel="noreferrer">Abrir WhatsApp de novo</a>
+        <a href="index.html" class="btn-outline">Voltar ao início</a>
+      </div>
+    </div>
   </main>
 
-  <footer class="footer">
-    <div class="container">© <span id="ano"></span> Eleven Labs. Todos os direitos reservados.</div>
-  </footer>
-
+  <script src="assets/common.js"></script>
   <script>
     const $ = id => document.getElementById(id);
-    $('ano').textContent = new Date().getFullYear();
-    const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    const NOMES = { starter: 'Starter', pro: 'Pro', business: 'Business' };
+    const pedido = Pedido.get() || {};
+    if (pedido.pedidoId) $('pedido-id').textContent = 'Pedido ' + pedido.pedidoId;
+    if (pedido.nome) $('ola').textContent = `Olá, ${pedido.nome.split(' ')[0]}!`;
 
-    let pedido = {};
-    try { pedido = JSON.parse(sessionStorage.getItem('elevenlabs_pedido')) || {}; } catch (_) {}
+    // Rascunho: não perde o que digitou se recarregar a página
+    const CAMPOS = ['company', 'segment', 'colors', 'script', 'instagram', 'notes'];
+    try {
+      const r = JSON.parse(localStorage.getItem('lume_brand_rascunho')) || {};
+      CAMPOS.forEach(k => { if (r[k]) $(k).value = r[k]; });
+    } catch (_) {}
+    document.getElementById('form-brand').addEventListener('input', () => {
+      const r = {}; CAMPOS.forEach(k => r[k] = $(k).value);
+      try { localStorage.setItem('lume_brand_rascunho', JSON.stringify(r)); } catch (_) {}
+    });
 
-    if (pedido.nome) $('ola-nome').textContent = pedido.nome.split(' ')[0];
-    if (pedido.empresa) { $('ola-empresa').textContent = pedido.empresa; $('marca').value = pedido.empresa; }
-    if (pedido.pedidoId) { $('pd-id').textContent = pedido.pedidoId; $('pedido-tag').textContent = pedido.pedidoId; }
-    else $('pedido-tag').classList.add('hidden');
-    if (pedido.plano) $('pd-plano').textContent = NOMES[pedido.plano] || pedido.plano;
-    if (pedido.email) $('pd-email').textContent = pedido.email;
-    if (pedido.valor) $('pd-valor').textContent = brl(pedido.valor);
-
-    // Restaura Brand salva antes
-    let salvo = {};
-    try { salvo = JSON.parse(localStorage.getItem('elevenlabs_brand')) || {}; } catch (_) {}
-    ['marca', 'slogan', 'cor1', 'cor2', 'voz', 'tom', 'idiomas', 'frase'].forEach(k => { if (salvo[k]) $(k).value = salvo[k]; });
-    let logoData = salvo.logo || '';
-
-    function atualizarPrevia() {
-      const c1 = $('cor1').value, c2 = $('cor2').value;
-      const marca = $('marca').value.trim() || 'Sua marca';
-      $('preview').style.background = `linear-gradient(135deg, ${c1}, ${c2})`;
-      $('preview').style.color = '#fff';
-      $('pv-marca').textContent = marca;
-      $('pv-slogan').textContent = $('slogan').value.trim() || 'Seu slogan aparece aqui';
-      $('pv-voz').textContent = `🎙️ ${$('voz').value} · ${$('tom').value}`;
-      const logo = $('pv-logo');
-      logo.style.background = 'rgba(255,255,255,0.2)';
-      logo.innerHTML = '';
-      if (logoData) {
-        const img = document.createElement('img');
-        img.src = logoData; img.alt = 'Logo';
-        logo.appendChild(img);
-      } else {
-        logo.textContent = marca.charAt(0).toUpperCase();
-      }
-    }
-    document.querySelectorAll('#brand-form input:not([type=file]), #brand-form select')
-      .forEach(el => el.addEventListener('input', atualizarPrevia));
-
+    let logoArquivo = null;
     $('logo').addEventListener('change', e => {
-      const f = e.target.files[0];
-      if (!f) return;
+      const f = e.target.files[0]; if (!f) return;
+      logoArquivo = f.name;
+      $('logo-nome').textContent = f.name;
       const r = new FileReader();
-      r.onload = () => { logoData = r.result; atualizarPrevia(); };
+      r.onload = () => { $('logo-thumb').innerHTML = `<img src="${r.result}" alt="Logo">`; };
       r.readAsDataURL(f);
     });
 
-    // Prévia de voz usando a síntese do navegador
-    // (para usar as vozes reais da Eleven Labs, troque por uma chamada à sua API de TTS)
-    $('ouvir').addEventListener('click', () => {
-      if (!('speechSynthesis' in window)) return toast('Seu navegador não suporta prévia de voz.');
-      speechSynthesis.cancel();
-      const u = new SpeechSynthesisUtterance($('frase').value);
-      u.lang = 'pt-BR';
-      const v = $('voz').value;
-      u.pitch = v.startsWith('Masculina') ? (v.includes('grave') ? 0.6 : 0.9) : 1.15;
-      u.rate = $('tom').value === 'Divertido' ? 1.15 : 1;
-      speechSynthesis.speak(u);
-    });
-
-    function toast(msg) {
-      const t = document.createElement('div');
-      t.className = 'toast'; t.textContent = msg;
-      document.body.appendChild(t);
-      setTimeout(() => t.remove(), 2800);
+    function erro(campo, msg) {
+      $(campo).setAttribute('aria-invalid', msg ? 'true' : 'false');
+      document.querySelector(`[data-err="${campo}"]`).textContent = msg || '';
+      return !msg;
     }
 
-    $('brand-form').addEventListener('submit', e => {
+    $('form-brand').addEventListener('submit', e => {
       e.preventDefault();
-      const dados = { logo: logoData };
-      ['marca', 'slogan', 'cor1', 'cor2', 'voz', 'tom', 'idiomas', 'frase'].forEach(k => dados[k] = $(k).value);
-      try { localStorage.setItem('elevenlabs_brand', JSON.stringify(dados)); } catch (_) {}
-      toast('✓ Brand salva com sucesso!');
-    });
+      const b = {
+        company: $('company').value.trim(),
+        segment: $('segment').value.trim(),
+        duration: document.querySelector('[name=duration]:checked').value,
+        voice: document.querySelector('[name=voice]:checked').value,
+        colors: $('colors').value.trim(),
+        script: $('script').value.trim(),
+        instagram: $('instagram').value.trim(),
+        notes: $('notes').value.trim(),
+      };
+      let ok = erro('company', b.company.length >= 2 ? '' : 'Informe o nome da empresa');
+      ok = erro('segment', b.segment.length >= 2 ? '' : 'Informe o ramo') && ok;
+      ok = erro('script', b.script.length >= 10 ? '' : 'Conte um pouco mais (mín. 10 caracteres)') && ok;
+      if (!ok) { document.querySelector('[aria-invalid=true]').focus(); return; }
 
-    atualizarPrevia();
+      const linhas = [
+        '*Briefing Lume Labs*',
+        pedido.pedidoId ? `Pedido: ${pedido.pedidoId}` : '',
+        pedido.nome ? `Cliente: ${pedido.nome}` : '',
+        '',
+        `Empresa: ${b.company}`,
+        `Ramo: ${b.segment}`,
+        `Duração: ${b.duration}`,
+        `Voz: ${b.voice}`,
+        b.colors ? `Cores: ${b.colors}` : '',
+        b.instagram ? `Instagram: ${b.instagram}` : '',
+        '',
+        `O que o vídeo deve falar: ${b.script}`,
+        b.notes ? `Observações: ${b.notes}` : '',
+        logoArquivo ? '\n(Vou enviar a logo aqui na conversa.)' : '',
+      ].filter((l, i, a) => l !== '' || a[i - 1] !== '');
+      const link = waLink(linhas.join('\n'));
+
+      try {
+        localStorage.setItem('lume_brand', JSON.stringify({ ...b, pedidoId: pedido.pedidoId, enviadoEm: new Date().toISOString() }));
+        localStorage.removeItem('lume_brand_rascunho');
+      } catch (_) {}
+
+      $('wa-again').href = link;
+      $('etapa-brand').classList.add('hidden');
+      $('etapa-fim').classList.remove('hidden');
+      scrollTo({ top: 0 });
+      window.open(link, '_blank', 'noopener');
+    });
   </script>
 </body>
 </html>
